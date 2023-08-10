@@ -4,6 +4,8 @@
  */
 package supermarket;
 
+import supermarket.view.CustomerView;
+
 /**
  *
  * @author Dell
@@ -14,7 +16,7 @@ public class Supermarket {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello");
+        new CustomerView().setVisible(true);
     }
     
 }
