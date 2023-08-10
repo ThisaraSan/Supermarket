@@ -11,6 +11,7 @@ package supermarket.model;
 public class CustomerModel {
     private String custId;
     private String custTitle;
+    private String custName;
     private String custDob;
     private Double custSalary;
     private String custAddress;
@@ -21,9 +22,10 @@ public class CustomerModel {
     public CustomerModel() {
     }
 
-    public CustomerModel(String custId, String custTitle, String custDob, Double custSalary, String custAddress, String custCity, String custProvince, String custZip) {
+    public CustomerModel(String custId, String custTitle, String custName, String custDob, Double custSalary, String custAddress, String custCity, String custProvince, String custZip) {
         this.custId = custId;
         this.custTitle = custTitle;
+        this.custName = custName;
         this.custDob = custDob;
         this.custSalary = custSalary;
         this.custAddress = custAddress;
@@ -31,6 +33,8 @@ public class CustomerModel {
         this.custProvince = custProvince;
         this.custZip = custZip;
     }
+
+   
 
     /**
      * @return the custId
@@ -142,11 +146,25 @@ public class CustomerModel {
      */
     public void setCustZip(String custZip) {
         this.custZip = custZip;
+    }   
+
+    /**
+     * @return the custName
+     */
+    public String getCustName() {
+        return custName;
+    }
+
+    /**
+     * @param custName the custName to set
+     */
+    public void setCustName(String custName) {
+        this.custName = custName;
     }
 
     @Override
     public String toString() {
-        return "CustomerController{" + "custId=" + custId + ", custTitle=" + custTitle + ", custDob=" + custDob + ", custSalary=" + custSalary + ", custAddress=" + custAddress + ", custCity=" + custCity + ", custProvince=" + custProvince + ", custZip=" + custZip + '}';
+        return "CustomerModel{" + "custId=" + custId + ", custTitle=" + custTitle + ", custName=" + custName + ", custDob=" + custDob + ", custSalary=" + custSalary + ", custAddress=" + custAddress + ", custCity=" + custCity + ", custProvince=" + custProvince + ", custZip=" + custZip + '}';
     }
     
     

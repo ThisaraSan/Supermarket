@@ -4,6 +4,11 @@
  */
 package supermarket.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import supermarket.controller.CustomerController;
 import supermarket.model.CustomerModel;
 
 /**
@@ -11,11 +16,12 @@ import supermarket.model.CustomerModel;
  * @author Dell
  */
 public class CustomerView extends javax.swing.JFrame {
-
+    CustomerController customerController;
     /**
      * Creates new form CustomerView
      */
     public CustomerView() {
+        customerController = new CustomerController();
         initComponents();
     }
 
@@ -298,7 +304,22 @@ public class CustomerView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void saveCustomer() {
-        CustomerModel customer = new CustomerModel(custIdText.getText(), custTitleCombo.getSelectedItem().toString(), custDobText.getText(), Double.parseDouble(custSalaryText.getText()), custAddressText.getText(), custCityText.getText(), custProvinceText.getText(), custZipText.getText());
+        try {
+            CustomerModel customer = new CustomerModel(custIdText.getText(),
+                    custTitleCombo.getSelectedItem().toString(),
+                    custNameText.getText(),
+                    custDobText.getText(),
+                    Double.parseDouble(custSalaryText.getText()) ,
+                    custAddressText.getText(), custCityText.getText(),
+                    custProvinceText.getText(),
+                    custZipText.getText());
+            
+            String resp = customerController.saveCustomr(customer);
+            JOptionPane.showMessageDialog(this, resp);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
         
                 
     }
