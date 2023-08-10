@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package supermarket.controller;
+package supermarket.model;
 
 /**
  *
  * @author Dell
  */
-public class CustomerController {
+public class CustomerModel {
     private String custId;
     private String custTitle;
     private String custDob;
@@ -18,10 +18,10 @@ public class CustomerController {
     private String custProvince;
     private String custZip;
 
-    public CustomerController() {
+    public CustomerModel() {
     }
 
-    public CustomerController(String custId, String custTitle, String custDob, Double custSalary, String custAddress, String custCity, String custProvince, String custZip) {
+    public CustomerModel(String custId, String custTitle, String custDob, Double custSalary, String custAddress, String custCity, String custProvince, String custZip) {
         this.custId = custId;
         this.custTitle = custTitle;
         this.custDob = custDob;

@@ -4,7 +4,7 @@
  */
 package supermarket.view;
 
-import supermarket.controller.CustomerController;
+import supermarket.model.CustomerModel;
 
 /**
  *
@@ -298,8 +298,8 @@ public class CustomerView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void saveCustomer() {
-        CustomerController customer = new CustomerController(custIdText.getText(), custTitleCombo.getSelectedItem().toString(), custDobText.getText(), Double.parseDouble(custSalaryText.getText()), custAddressText.getText(), custCityText.getText(), custProvinceText.getText(), custZipText.getText());
-        System.out.println(customer.toString());
+        CustomerModel customer = new CustomerModel(custIdText.getText(), custTitleCombo.getSelectedItem().toString(), custDobText.getText(), Double.parseDouble(custSalaryText.getText()), custAddressText.getText(), custCityText.getText(), custProvinceText.getText(), custZipText.getText());
+        
                 
     }
 }
