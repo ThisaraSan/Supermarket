@@ -5,9 +5,11 @@
 package supermarket.view;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import supermarket.controller.CustomerController;
 import supermarket.model.CustomerModel;
 
@@ -23,6 +25,7 @@ public class CustomerView extends javax.swing.JFrame {
     public CustomerView() {
         customerController = new CustomerController();
         initComponents();
+        loadAllCustomers();
     }
 
     /**
@@ -85,7 +88,7 @@ public class CustomerView extends javax.swing.JFrame {
 
         custTitleLable.setText("Title");
 
-        custTitleCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr.", "Mrs.", "Ven." }));
+        custTitleCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mr", "Mrs", "Miss", "Ven" }));
 
         custNameLabel.setText("Customer Name");
 
@@ -316,11 +319,46 @@ public class CustomerView extends javax.swing.JFrame {
             
             String resp = customerController.saveCustomr(customer);
             JOptionPane.showMessageDialog(this, resp);
+            clear();
+            loadAllCustomers();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }                
+    }
+    
+    private void clear(){
+        custIdText.setText("");
+        custNameText.setText("");
+        custDobText.setText("");
+        custSalaryText.setText("");
+        custAddressText.setText("");
+        custCityText.setText("");
+        custProvinceText.setText("");
+        custZipText.setText("");
+    }
+    private void loadAllCustomers(){
+        try {
+            String[] columns = {"Customer ID", "Name", "Address", "Salary", "Postal Code"};
+            DefaultTableModel dtm = new DefaultTableModel(columns, 0){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            custTable.setModel(dtm);
+            
+            ArrayList<CustomerModel> customers = customerController.loadAllCustomers();
+            for(CustomerModel customer : customers){
+                Object[] rowData = {customer.getCustId(), customer.getCustTitle()+". "+customer.getCustName(), customer.getCustAddress()+", "+customer.getCustCity(),customer.getCustSalary(),customer.getCustZip()};
+                dtm.addRow(rowData);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerView.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-        
-                
     }
+        
+    
+    
 }
