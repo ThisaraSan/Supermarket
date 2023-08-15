@@ -88,5 +88,26 @@ public class CustomerController {
         }
         return null;
     }
+    
+    public String updateCustomer(CustomerModel customer) throws SQLException{
+        Connection connection = DBConnection.getInstance().getConnection();
+        String query = "UPDATE customer SET CustTitle=?, CustName=?, DOB=?, salary=?, CustAddress=?, City=?, Province=?, PostalCode=? WHERE CustID=?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, customer.getCustTitle());
+        statement.setString(2, customer.getCustName());
+        statement.setString(3, customer.getCustDob());
+        statement.setDouble(4, customer.getCustSalary());
+        statement.setString(5, customer.getCustAddress());
+        statement.setString(6, customer.getCustCity());
+        statement.setString(7, customer.getCustProvince());
+        statement.setString(8, customer.getCustZip());
+        statement.setString(9, customer.getCustId());
+        
+        if(statement.executeUpdate()>0){
+                return "Success";
+            }else{
+            return "Fail";
+            }
+    }
 
 }
